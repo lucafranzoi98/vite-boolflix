@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 import axios from "axios";
+import * as mdb from 'mdb-ui-kit';
 
 export const state = reactive({
    inputSearchMovie: "",
@@ -13,9 +14,7 @@ export const state = reactive({
       .then(response => {
          this.movies = response.data.results;
       })
-      this.inputSearchMovie = "";
-
-       
+      this.inputSearchMovie = "";       
    },
 
    getFlagEmoji(countryCode) {
@@ -24,5 +23,11 @@ export const state = reactive({
         .split('')
         .map(char =>  127397 + char.charCodeAt());
       return String.fromCodePoint(...codePoints);
-    }
+   },
+
+   getFlag(countryCode){
+      return `flag flag-${countryCode}`
+   }
+
+
 })
