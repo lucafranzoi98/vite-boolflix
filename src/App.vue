@@ -20,8 +20,13 @@ export default{
    <button @click="state.fetchData()">SEARCH</button>
 
    <ul>
-      <li v-for="movie in state.movies">{{ movie.title }}, {{ movie.original_title }}, {{ movie.original_language }}, {{ movie.vote_average }}</li>
+      <li v-for="movie in state.movies">{{ movie.title }}, {{ movie.original_title }}, {{ state.getFlagEmoji(movie.original_language) }}, {{ movie.vote_average }}</li>
    </ul>
+
+   
+
+
+
    
 
 </template>
