@@ -1,2 +1,18 @@
 @use '/node_modules/bootstrap/scss/bootstrap.scss';
 @use "./partials/variables.scss" as *;
+
+
+body{
+   background-color: $bf-dark;
+   color: $bf-light;
+
+   .bf_input{
+      position: relative;
+
+      & > div{
+         position: absolute;
+         font-size: 0.75rem;
+         margin-top: 0.25rem;
+      }
+   }
+}
