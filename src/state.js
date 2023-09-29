@@ -1,20 +1,42 @@
 import { reactive } from "vue";
 import axios from "axios";
-import * as mdb from 'mdb-ui-kit';
 
 export const state = reactive({
    inputSearchMovie: "",
+   endpointMovies: "https://api.themoviedb.org/3/search/movie?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=",
+   endpointSeries: "https://api.themoviedb.org/3/search/tv?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=",
    movies: "",
-   base_url: "https://api.themoviedb.org/3/search/movie?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=",
+   series: "",
 
-
-   fetchData(){
+   fetchData(link, result){
       axios
-      .get(`${this.base_url}${this.inputSearchMovie}`)
+      .get(`${link}${this.inputSearchMovie}`)
+      .then(response => {
+         result = response.data.results;
+         console.log(result);
+         console.log(this.movies);
+         })
+      },
+
+   fetchDataMovies(){
+      axios
+      .get(`https://api.themoviedb.org/3/search/movie?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=${this.inputSearchMovie}`)
       .then(response => {
          this.movies = response.data.results;
-      })
-      this.inputSearchMovie = "";       
+         })
+      },
+
+   fetchDataSeries(){
+      axios
+      .get(`https://api.themoviedb.org/3/search/tv?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=${this.inputSearchMovie}`)
+      .then(response => {
+         this.series = response.data.results;
+         })
+      },
+
+   searchButton(){
+      this.fetchDataMovies(this.endpointMovies, this.movies);
+      this.fetchDataSeries(this.endpointSeries, this.series);
    },
 
    getFlagEmoji(countryCode) {
@@ -23,11 +45,7 @@ export const state = reactive({
         .split('')
         .map(char =>  127397 + char.charCodeAt());
       return String.fromCodePoint(...codePoints);
-   },
-
-   getFlag(countryCode){
-      return `flag flag-${countryCode}`
-   }
+   }, 
 
 
 })
