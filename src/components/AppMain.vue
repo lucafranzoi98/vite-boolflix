@@ -12,23 +12,32 @@ export default{
 
 <template>
 
-   <div v-if="state.isEmpty == false">
-      <ul v-if="state.movies != ''">Movies
-         <li v-for="movie in state.movies">
+   <div v-if="state.isEmpty == false" class="container m-auto">
 
-            {{ movie.title }},
+      <div v-if="state.movies != ''">
+         <h3>Movies</h3>
 
-            {{ movie.original_title }},
-
-            <span v-html="state.getVote(movie.vote_average)"></span>
-
-            {{ state.getFlagEmoji(movie.original_language) }},
-
-            <img v-if="movie.poster_path != null" :src="state.getCover(movie.poster_path)">
-            <img v-else src="./assets/img/404.png" width="100">
+         <div class="row row-cols-5 g-3">
+            <div v-for="movie in state.movies" class="col">
+               <div class="card h-100" style="width: 16rem;">
+                  <img class="card-img-top" v-if="movie.poster_path != null" :src="state.getCover(movie.poster_path)">
+                  <img class="card-img-top" v-else src="../assets/img/404.png" width="100">
+                  <div class="card-body">
+                     <h5 class="card-title">{{ movie.title }}</h5>
+                     <h6 class="card-title">{{ movie.original_title }}</h6>
+                     <span v-html="state.getVote(movie.vote_average)"></span>
+                     {{ state.getFlagEmoji(movie.original_language) }},
+                  </div>
+               </div>
+            </div>
             
-         </li>
-      </ul>
+
+         </div>
+
+         
+
+      </div>
+
       <div v-else>No movies found</div>
 
       <ul v-if="state.series != ''">Series
