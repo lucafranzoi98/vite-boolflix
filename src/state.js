@@ -10,16 +10,7 @@ export const state = reactive({
    isEmpty: true,
    isNotValid: false,
 
-   fetchData(link, result){
-      axios
-      .get(`${link}${this.inputSearchMovie}`)
-      .then(response => {
-         result = response.data.results;
-         console.log(result);
-         console.log(this.movies);
-      })
-   },
-
+   // Get data from movies API
    fetchDataMovies(){
       axios
       .get(`https://api.themoviedb.org/3/search/movie?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=${this.inputSearchMovie}`)
@@ -28,6 +19,7 @@ export const state = reactive({
       })
    },
 
+   // Get data from series API
    fetchDataSeries(){
       axios
       .get(`https://api.themoviedb.org/3/search/tv?api_key=2591c3e5f53b06a41e1529a348580043&language=it-IT&query=${this.inputSearchMovie}`)
@@ -36,6 +28,10 @@ export const state = reactive({
       })
    },
 
+   // Search btn funcionalities
+   // Get data from API
+   // Check if input field is valid (at least 1 characther)
+   // Clear input field after click
    searchButton(){
       if (this.inputSearchMovie.split(" ").join("") != "") {
          this.fetchDataMovies(this.endpointMovies, this.movies);
@@ -49,6 +45,7 @@ export const state = reactive({
       
    },
 
+   // Get flag (on windows they are rendered as Country Code Emoji) from language
    getFlagEmoji(countryCode) {
       const codePoints = countryCode
         .toUpperCase()
@@ -57,13 +54,14 @@ export const state = reactive({
       return String.fromCodePoint(...codePoints);
    },
 
+   // Get vote and convert on a scale from 0 to 5
+   // Convert it in star icons
    getVote(vote){
       let stars = Math.round(vote / 2);
       return `<img src="/src/assets/img/full-star.svg" width="10" height="10">`.repeat(stars) + `<img src="/src/assets/img/empty-star.svg" width="10">`.repeat(5 - stars);
    },
 
-
-
+   // Get link to cover img
    getCover(path){
       const imgPath = `https://image.tmdb.org/t/p/w342${path}`
       return imgPath

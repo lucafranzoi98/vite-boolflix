@@ -6,13 +6,18 @@ body{
    background-color: $bf-dark;
    color: $bf-light;
 
-   .bf_input{
-      position: relative;
+   header{
+      
+      .bf_input{
+         position: relative;
 
-      & > div{
-         position: absolute;
-         font-size: 0.75rem;
-         margin-top: 0.25rem;
+         & > div{
+            position: absolute;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+         }
       }
    }
+
+   
 }

@@ -1,58 +1,58 @@
 <script>
 import { state } from "../state.js";
+import AppMovieCard from "./AppMovieCard.vue";
+import AppSerieCard from "./AppSerieCard.vue";
+
 export default{
    name: "AppMain",
    data (){
       return {
          state
       }
+   },
+   components: {
+      AppMovieCard,
+      AppSerieCard
    }
 }
 </script>
 
 <template>
 
-   <div v-if="state.isEmpty == false" class="container m-auto">
+   <!-- Check if input is empty: first time on page (welcome page) -->
+   <div v-if="state.isEmpty == false" class="container m-auto my-4">
 
+      <!-- Check if there are movies results -->
       <div v-if="state.movies != ''">
-         <h3>Movies</h3>
 
+         <h2 class="mb-3">Movies</h2>
          <div class="row row-cols-5 g-3">
-            <div v-for="movie in state.movies" class="col">
-               <div class="card h-100" style="width: 16rem;">
-                  <img class="card-img-top" v-if="movie.poster_path != null" :src="state.getCover(movie.poster_path)">
-                  <img class="card-img-top" v-else src="../assets/img/404.png" width="100">
-                  <div class="card-body">
-                     <h5 class="card-title">{{ movie.title }}</h5>
-                     <h6 class="card-title">{{ movie.original_title }}</h6>
-                     <span v-html="state.getVote(movie.vote_average)"></span>
-                     {{ state.getFlagEmoji(movie.original_language) }},
-                  </div>
-               </div>
-            </div>
             
+            <AppMovieCard v-for="movie in state.movies" :movie="movie"></AppMovieCard>
+
+         </div>
+      </div>
+
+      <h3 v-else>No movies found</h3>
+
+      <!-- Check if there are series results -->
+      <div v-if="state.series != ''">
+
+         <h2 class="mt-5 mb-3">Series</h2>
+         <div class="row row-cols-5 g-3">
+
+            <AppSerieCard v-for="serie in state.series" :serie="serie"></AppSerieCard>
 
          </div>
 
-         
 
       </div>
 
-      <div v-else>No movies found</div>
+      <h3 v-else>No series found</h3>
 
-      <ul v-if="state.series != ''">Series
-         <li v-for="serie in state.series">
-            {{ serie.name }},
-            {{ serie.original_name }},
-            {{ state.getFlagEmoji(serie.original_language) }},
-            {{ Math.round(serie.vote_average / 2) }}
-            <img v-if="serie.poster_path != null" :src="state.getCover(serie.poster_path)">
-            <img v-else src="./assets/img/404.png" width="100">
-         </li>
-      </ul>
-      <div v-else>No series found</div>
    </div>
 
+   <!-- First page load: welcome page -->
    <h1 v-else class="text-center mt-3">
       Welcome! Search something
    </h1>
