@@ -66,4 +66,5 @@ export const state = reactive({
       const imgPath = `https://image.tmdb.org/t/p/w342${path}`
       return imgPath
    },
+   
 })

@@ -23,13 +23,14 @@ export default{
          <div class="cover-hover rounded-2 overflow-auto">
             <h5>{{ movie.title }}</h5>           
             <h6 class="fst-italic">{{ movie.original_title }}</h6>
-            <p class="fw-light">{{ movie.overview }}</p>
-            <div>
+            <div class="mb-2">
                <span v-html="state.getVote(movie.vote_average)" class="star-color"></span>
                {{ state.getFlagEmoji(movie.original_language) }}
             </div>
+            <p class="fw-light">{{ movie.overview }}</p>
+
          </div>
-         
+
       </div>
       
    </div>
