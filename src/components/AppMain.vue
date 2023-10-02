@@ -19,42 +19,46 @@ export default{
 
 <template>
 
-   <!-- Check if input is empty: first time on page (welcome page) -->
-   <div v-if="state.isEmpty == false" class="container m-auto my-4">
+   <main>
 
-      <!-- Check if there are movies results -->
-      <div v-if="state.movies != ''">
+      <!-- Check if input is empty: first time on page (welcome page) -->
+      <div v-if="state.isEmpty == false" class="container m-auto my-4">
 
-         <h2 class="mb-3">Movies</h2>
-         <div class="row row-cols-5 g-3">
-            
-            <AppMovieCard v-for="movie in state.movies" :movie="movie"></AppMovieCard>
+         <!-- Check if there are movies results -->
+         <div v-if="state.movies != ''">
 
-         </div>
-      </div>
+            <h2 class="mb-3">Movies</h2>
+            <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-2 g-3">
+               
+               <AppMovieCard v-for="movie in state.movies" :movie="movie"></AppMovieCard>
 
-      <h3 v-else>No movies found</h3>
-
-      <!-- Check if there are series results -->
-      <div v-if="state.series != ''">
-
-         <h2 class="mt-5 mb-3">Series</h2>
-         <div class="row row-cols-5 g-3">
-
-            <AppSerieCard v-for="serie in state.series" :serie="serie"></AppSerieCard>
-
+            </div>
          </div>
 
+         <h3 v-else>No movies found</h3>
+
+         <!-- Check if there are series results -->
+         <div v-if="state.series != ''">
+
+            <h2 class="mt-5 mb-3">Series</h2>
+            <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-2 g-3">
+
+               <AppSerieCard v-for="serie in state.series" :serie="serie"></AppSerieCard>
+
+            </div>
+
+
+         </div>
+
+         <h3 v-else class="mt-5 mb-3">No series found</h3>
 
       </div>
 
-      <h3 v-else>No series found</h3>
-
-   </div>
-
-   <!-- First page load: welcome page -->
-   <h1 v-else class="text-center mt-3">
-      Welcome! Search something
-   </h1>
+      <!-- First page load: welcome page -->
+      <h1 v-else class="text-center mt-3">
+         Welcome! Search something
+      </h1>
+      
+   </main>
 
 </template>

@@ -19,5 +19,32 @@ body{
       }
    }
 
+   main{
+
+      .cover:hover .cover-hover{
+         display: block;
+      }
+
+      .cover-hover{
+         display: none;
+         position: absolute;
+         top: 0;
+         left: 0;
+         background-color: rgba($color: #000000, $alpha: 0.90);
+         width: 100%;
+         height: 100%;
+         padding: 1rem;
+
+         .card-font{
+            font-size: 0.75rem;
+            font-weight: 200;
+         }
+
+         .star-color{
+            filter: invert(86%) sepia(98%) saturate(874%) hue-rotate(357deg) brightness(109%) contrast(104%);
+         }
+         
+      }
+   }
    
 }

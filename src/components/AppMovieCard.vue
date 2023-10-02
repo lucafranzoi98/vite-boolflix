@@ -16,16 +16,22 @@ export default{
 <template>
 
    <div class="col">
-      <div class="card h-100" style="width: 16rem;">
-         <img class="card-img-top" v-if="movie.poster_path != null" :src="state.getCover(movie.poster_path)">
-         <img class="card-img-top" v-else src="../assets/img/404.png" width="100">
-         <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-            <h6 class="card-title">{{ movie.original_title }}</h6>
-            <span v-html="state.getVote(movie.vote_average)"></span>
-            {{ state.getFlagEmoji(movie.original_language) }}
+      <div class="h-100 cover position-relative">
+         <img class="h-100 w-100 rounded-2 shadow-sm" v-if="movie.poster_path != null" :src="state.getCover(movie.poster_path)">
+         <img class="h-100 w-100 rounded-2 shadow-sm object-fit-cover" v-else src="../assets/img/404.jpg">
+
+         <div class="cover-hover rounded-2 overflow-auto">
+            <h5>{{ movie.title }}</h5>           
+            <h6 class="fst-italic">{{ movie.original_title }}</h6>
+            <p class="fw-light">{{ movie.overview }}</p>
+            <div>
+               <span v-html="state.getVote(movie.vote_average)" class="star-color"></span>
+               {{ state.getFlagEmoji(movie.original_language) }}
+            </div>
          </div>
+         
       </div>
+      
    </div>
 
 </template>

@@ -17,16 +17,23 @@ export default{
 <template>
 
    <div class="col">
-      <div class="card h-100" style="width: 16rem;">
-         <img class="card-img-top" v-if="serie.poster_path != null" :src="state.getCover(serie.poster_path)">
-         <img class="card-img-top" v-else src="../assets/img/404.png" width="100">
-         <div class="card-body">
-            <h5 class="card-title">{{ serie.name }}</h5>
-            <h6 class="card-title">{{ serie.original_name }}</h6>
-            <span v-html="state.getVote(serie.vote_average)"></span>
-            {{ state.getFlagEmoji(serie.original_language) }}
+      <div class="h-100 cover position-relative">
+         <img class="h-100 w-100 rounded-2 shadow-sm" v-if="serie.poster_path != null" :src="state.getCover(serie.poster_path)">
+         <img class="h-100 w-100 rounded-2 shadow-sm object-fit-cover" v-else src="../assets/img/404.jpg">
+
+         <div class="cover-hover rounded-2 overflow-auto">
+            <h5>{{ serie.name }}</h5>           
+            <h6 class="fst-italic">{{ serie.original_name }}</h6>
+            <p class="fw-light">{{ serie.overview }}</p>
+            <div>
+               <span v-html="state.getVote(serie.vote_average)" class="star-color"></span>
+               {{ state.getFlagEmoji(serie.original_language) }}
+            </div>
          </div>
+
       </div>
+      
+
    </div>
 
 </template>
